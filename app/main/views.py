@@ -40,7 +40,7 @@ def new_pitch():
         category = pform.category.data
         user_id = current_user
         new_pitch_object = Pitch(post=post,user_id=current_user._get_current_object().id,category=category,title=title)
-        new_pitch_object.save_p()
+        new_pitch_object.save_pitch()
         return redirect(url_for('main.index'))
         
     return render_template('new_pitch.html', form = pform)
