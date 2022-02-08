@@ -24,10 +24,7 @@ class Pitch(db.Model):
     Pitch class to define pitch columns
     '''
 
-    # def __init__(self, id, title, post, poster, vote_average, vote_count):
-    #     self.id = id
-    #     self.title = title
-    #     self.post = post
+   
     def save_pitch(self):
         
         db.session.add(self)
@@ -87,7 +84,7 @@ class Comment(db.Model):
     __tablename__ = 'comments'
 
     id = db.Column(db.Integer, primary_key=True)
-    comment = db.Column(db.Text(), nullable=False)
+    comment = db.Column(db.Text(255), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     pitch_id = db.Column(db.Integer, db.ForeignKey(
         'pitches.id'), nullable=False)
