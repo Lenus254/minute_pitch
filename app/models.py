@@ -42,7 +42,7 @@ class User(UserMixin,db.Model):
     __tablename__ = 'users'
     
     id = db.Column(db.Integer,primary_key = True)
-    username = db.Column(db.String(25),index = True)
+    username = db.Column(db.String(255),index = True)
     email = db.Column(db.String(255),unique = True,index = True)
     pitches = db.relationship('Pitch',backref = 'user',lazy="dynamic")
     comments = db.relationship('Comment',backref = 'user',lazy = "dynamic")
@@ -84,5 +84,27 @@ class Comment(db.Model):
     def get_comments(cls,id):
         comments = Comment.query.filter_by(pitch_id=id).all()
         return comments
+    
+    
+class Upvote(db.Model):
+    __tablename__ = 'upvotes'
+
+    id = db.Column(db.Integer,primary_key=True)
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
+    
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_upvotes(cls,id):
+        upvote =Upvote.query.filter_by(pitch_id=id).all()
+        return upvote
+
+
+    def __repr__(self):
+        return f'{self.user_id}:{self.pitch_id}'    
 
     
