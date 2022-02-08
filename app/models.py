@@ -42,7 +42,7 @@ class User(UserMixin,db.Model):
     __tablename__ = 'users'
     
     id = db.Column(db.Integer,primary_key = True)
-    username = db.Column(db.String(255),index = True)
+    username = db.Column(db.String(25),index = True)
     email = db.Column(db.String(255),unique = True,index = True)
     pitches = db.relationship('Pitch',backref = 'user',lazy="dynamic")
     comments = db.relationship('Comment',backref = 'user',lazy = "dynamic")
@@ -62,20 +62,6 @@ class User(UserMixin,db.Model):
 
     def verify_password(self,password):
         return check_password_hash(self.password_secure,password)
-
-
-# class Category(db.Model):
-#     __tablename__ = 'categories'
-
-#     id = db.Column(db.Integer,primary_key = True)
-#     name = db.Column(db.String(255), index = True)
-#     pitches = db.relationship('Pitch',backref = 'category',lazy = "dynamic")
-
-#     @classmethod
-#     def get_categories(cls):
-#         categories = Category.query.all()
-#         return categories
-
 
 
 
@@ -99,14 +85,4 @@ class Comment(db.Model):
         comments = Comment.query.filter_by(pitch_id=id).all()
         return comments
 
-    # def save_comment(self):
-
-
-    # @classmethod
-    # def get_comments(cls, id):
-
-    # for comment in cls.all_comments:
-    #     if comment.pitch_id == id:
-
-
-    # def __repr__(self):
+    
