@@ -1,0 +1,18 @@
+{%extends 'base.html'%} 
+{%block content%} 
+<h1 class="text-center">hello world</h1>
+{% for pitch in pitches %}
+    
+        <div class="card-body">
+            <p class="cart">{{ pitch.category}}</p>
+            <h5 class="card-title">{{ pitch.title}}</h5>
+            
+            <p class="card-text">{{ pitch.post}}</p>
+            <p class="posted-at"> <em>Posted at: {{ pitch.time}}</em> </p>
+            <a href="#" class="btn btn-outline-info btn-block">Comment</a>
+        </div>
+
+   
+
+    {% endfor %}
+{%endblock%}
