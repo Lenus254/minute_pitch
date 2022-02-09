@@ -4,3 +4,12 @@
     flex-direction: row;
 
  }
+
+ #h2{
+     font-size: 35px;
+     margin-top: 5%;
+
+ }
+ .comment{
+     background-color: red;
+ }

@@ -27,7 +27,7 @@ def index():
     business= Pitch.query.filter_by(category = 'business').all()
     personal = Pitch.query.filter_by(category = 'personal').all()
 
-    return render_template('index.html',title = title, pitches = pitches, products= products, economy=economy, business=business, personal=personal  )
+    return render_template('index.html',title = title, pitches = pitches, product= products, economy=economy, business=business, personal=personal  )
 
 
 @main.route('/create_new', methods = ['POST','GET'])
@@ -58,7 +58,7 @@ def comment(pitch_id):
         pitch_id = pitch_id
         user_id = current_user._get_current_object().id
         new_comment = Comment(comment = comment,user_id = user_id,pitch_id = pitch_id)
-        new_comment.save_c()
+        new_comment.save_comment()
         return redirect(url_for('.comment', pitch_id = pitch_id))
     return render_template('comment.html', form =form, pitch = pitch,all_comments=all_comments)
 
@@ -109,7 +109,7 @@ def like(id):
             return redirect(url_for('main.index',id=id))
         else:
             continue
-    new_vote = Upvote(user = current_user, pitch_id=id)
+    new_vote = Upvote( pitch_id=id)
     new_vote.save()
     return redirect(url_for('main.index',id=id))
 
@@ -125,6 +125,6 @@ def dislike(id):
             return redirect(url_for('main.index',id=id))
         else:
             continue
-    new_downvote = Downvote(user = current_user, pitch_id=id)
+    new_downvote = Downvote( pitch_id=id)
     new_downvote.save()
     return redirect(url_for('main.index',id = id))

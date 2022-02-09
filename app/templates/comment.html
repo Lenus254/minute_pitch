@@ -7,11 +7,11 @@
 
             {% if all_comments %}
                 <div class="col-md-7" >
-                    <h3 class="text-center" >All comments for the post</h3>
+                    <h3 class='' >All comments for the post</h3>
                     {% for comment in all_comments %}
-                       <div class="card  mb-3" >
+                       <div class="card comment" >
                            <div class="card-body">
-                            <h5>{{comment.pitch.title}}</h5>
+                            <h5 class="card-title">{{comment.pitch.title}}</h5>
                              <p class="card-title">{{ comment.comment }}</p>
                              <p class="card-text">--- {{comment.user.username}}</p>
                            </div>

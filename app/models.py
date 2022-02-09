@@ -17,8 +17,11 @@ class Pitch(db.Model):
     post = db.Column(db.String(255))
     time = db.Column(db.DateTime, default = datetime.utcnow)
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
-    comments = db.relationship('Comment',backref = 'pitch',lazy = "dynamic")
     category = db.Column(db.String(255))
+    comments = db.relationship('Comment',backref = 'pitch',lazy = "dynamic")
+    upvote = db.relationship('Upvote',backref = 'pitch',lazy = "dynamic")
+    downvote = db.relationship('Downvote',backref = 'pitch',lazy = "dynamic")
+    
 
     '''
     Pitch class to define pitch columns
@@ -30,10 +33,10 @@ class Pitch(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    @classmethod
-    def get_pitches(cls, id):
-        pitches = Pitch.query.filter_by(category_id = id).all()
-        return pitches
+    # @classmethod
+    # def get_pitches(cls, id):
+    #     pitches = Pitch.query.filter_by(category_id = id).all()
+    #     return pitches
 
 
 
